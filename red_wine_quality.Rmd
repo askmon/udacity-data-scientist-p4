@@ -1,0 +1,56 @@
+---
+title: "Red Wine Quality"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE, packages}
+library(ggplot2)
+library(gridExtra)
+library(GGally)
+library(RColorBrewer)
+```
+
+## Nanodegree Data Scientist - Projeto 4 - Qualidade de Vinhos Tintos
+
+Neste projetos analisaremos um conjunto de dados sobre propriedades de vinhos tintos.
+
+Começamos importando o arquivo CSV
+
+```{r}
+winedata <- read.csv('wineQualityReds.csv')
+
+# Verificando os campos do arquivo
+names(winedata)
+```
+Olhando os campos podemos observar que os campos são atributos do vinho, além de haver um campo `quality` que é uma nota atribuída à qualidade do vinho. Será que podemos prever a qualidade de um vinho baseado nas suas características?
+
+
+```{r}
+# Vamos ver como está a distribuição de notas
+qplot(x = quality, data = winedata)
+```
+
+Neste gráfico podemos ver que a maior parte dos vinhos avaliados está com uma nota na média, isso pode dificultar um pouco a análise, já que os vinhos considerados muito bons ou muito ruins são exceções, além de que não temos nenhum com a nota mínima ou a nota máxima. Vamos então colocar as outras variáveis em gráficos para sentir como os dados estão distribuídos e para onde será melhor seguir.
+
+```{r}
+c1 <- qplot(data = winedata, x = fixed.acidity)
+c2 <- qplot(data = winedata, x = volatile.acidity)
+c3 <- qplot(data = winedata, x = citric.acid)
+c4 <- qplot(data = winedata, x = residual.sugar)
+c5 <- qplot(data = winedata, x = chlorides)
+c6 <- qplot(data = winedata, x = free.sulfur.dioxide)
+c7 <- qplot(data = winedata, x = total.sulfur.dioxide)
+c8 <- qplot(data = winedata, x = density)
+c9 <- qplot(data = winedata, x = pH)
+c10 <- qplot(data = winedata, x = sulphates)
+c11 <- qplot(data = winedata, x = alcohol)
+
+grid.arrange(c1, c2, c3)
+grid.arrange(c4, c5, c6)
+grid.arrange(c7, c8, c9)
+grid.arrange(c10, c11)
+```
